@@ -1,70 +1,61 @@
+
 package University.System;
 
-import java.util.*;
+public class Student {
 
-public class Main {
+    private String studentID;
+    private String studentName;
+    private double average;
 
-    public static void main(String[] args) {
-
-        ArrayList<GraduateStudent> students = new ArrayList<GraduateStudent>();
-
-        System.out.println("Fill The Array");
-        students = FillData(students);
-
-        System.out.println("Students With Thesis Mark >= 70");
-        students = PrintData(students);
+    public Student() {
     }
 
-    public static ArrayList<GraduateStudent> FillData(ArrayList<GraduateStudent> students) {
-
-        Scanner in = new Scanner(System.in);
-
-        for(int i = 0; i < 3; i++) {
-
-            System.out.print("Student ID: ");
-            String id = in.next();
-
-            System.out.print("Student Name: ");
-            String name = in.next();
-
-            System.out.print("Average: ");
-            double avg = in.nextDouble();
-            in.nextLine();
-
-            System.out.print("Major (CS/AI): ");
-            String major = in.nextLine();
-
-            System.out.print("University: ");
-            String university = in.nextLine();
-
-            System.out.print("Thesis Mark: ");
-            double thesis = in.nextDouble();
-
-            GraduateStudent g = new GraduateStudent(
-                    major,
-                    university,
-                    thesis,
-                    id,
-                    name,
-                    avg
-            );
-
-            students.add(g);
-        }
-
-        return students;
+    public Student(String studentID, String studentName, double average) {
+        this.studentID = studentID;
+        this.studentName = studentName;
+        this.average = average;
     }
 
-    public static ArrayList<GraduateStudent> PrintData(ArrayList<GraduateStudent> students) {
+    public String getStudentID() {
+        return studentID;
+    }
 
-        for(int i = 0; i < students.size(); i++) {
+    public void setStudentID(String studentID) {
+        if(studentID.startsWith("S"))
+            this.studentID = studentID;
+    }
 
-            if(students.get(i).getThesisMark() >= 70) {
+    public String getStudentName() {
+        return studentName;
+    }
 
-                System.out.println(students.get(i).toString());
-            }
-        }
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
 
-        return students;
+    public double getAverage() {
+        return average;
+    }
+
+    public void setAverage(double average) {
+        if(average >= 0 && average <= 100)
+            this.average = average;
+    }
+
+    public void showStudent() {
+        System.out.println("Student Name: " + studentName);
+    }
+
+    public void checkAverage() {
+
+        if(average >= 50)
+            System.out.println("Pass");
+        else
+            System.out.println("Fail");
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" + "studentID=" + studentID + ", studentName=" + studentName + ", average=" + average + '}';
     }
 }

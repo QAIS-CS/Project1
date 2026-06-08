@@ -1,61 +1,70 @@
-
 package University.System;
 
-public class GraduateStudent extends Student {
+import java.util.*;
 
-    private String major;
-    private String university;
-    private double thesisMark;
+public class Main {
 
-    public GraduateStudent() {
-        super();
+    public static void main(String[] args) {
+
+        ArrayList<GraduateStudent> students = new ArrayList<GraduateStudent>();
+
+        System.out.println("Fill The Array");
+        students = FillData(students);
+
+        System.out.println("Students With Thesis Mark >= 70");
+        students = PrintData(students);
     }
 
-    public GraduateStudent(String major, String university, double thesisMark,
-            String studentID, String studentName, double average) {
+    public static ArrayList<GraduateStudent> FillData(ArrayList<GraduateStudent> students) {
 
-        super(studentID, studentName, average);
+        Scanner in = new Scanner(System.in);
 
-        this.major = major;
-        this.university = university;
-        this.thesisMark = thesisMark;
+        for(int i = 0; i < 3; i++) {
+
+            System.out.print("Student ID: ");
+            String id = in.next();
+
+            System.out.print("Student Name: ");
+            String name = in.next();
+
+            System.out.print("Average: ");
+            double avg = in.nextDouble();
+            in.nextLine();
+
+            System.out.print("Major (CS/AI): ");
+            String major = in.nextLine();
+
+            System.out.print("University: ");
+            String university = in.nextLine();
+
+            System.out.print("Thesis Mark: ");
+            double thesis = in.nextDouble();
+
+            GraduateStudent g = new GraduateStudent(
+                    major,
+                    university,
+                    thesis,
+                    id,
+                    name,
+                    avg
+            );
+
+            students.add(g);
+        }
+
+        return students;
     }
 
-    public String getMajor() {
-        return major;
-    }
+    public static ArrayList<GraduateStudent> PrintData(ArrayList<GraduateStudent> students) {
 
-    public void setMajor(String major) {
-        if(major.equals("CS") || major.equals("AI"))
-            this.major = major;
-    }
+        for(int i = 0; i < students.size(); i++) {
 
-    public String getUniversity() {
-        return university;
-    }
+            if(students.get(i).getThesisMark() >= 70) {
 
-    public void setUniversity(String university) {
-        this.university = university;
-    }
+                System.out.println(students.get(i).toString());
+            }
+        }
 
-    public double getThesisMark() {
-        return thesisMark;
-    }
-
-    public void setThesisMark(double thesisMark) {
-        this.thesisMark = thesisMark;
-    }
-
-    public void thesisResult() {
-
-        if(thesisMark >= 70)
-            System.out.println("Excellent Thesis");
-        else
-            System.out.println("Normal Thesis");
-    }
-
-    @Override
-    public String toString() {
-        return "GraduateStudent{" + "major=" + major + ", university=" + university + ", thesisMark=" + thesisMark + '}';
+        return students;
     }
 }
